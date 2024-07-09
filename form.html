@@ -1,0 +1,108 @@
+<div class="message-container">
+    <?php if (!empty($message)) : ?>
+        <p class="message"><?php echo $message; ?></p>
+    <?php endif; ?>
+    
+    <?php if (!empty($warning)) : ?>
+        <p class="warning"><?php echo $warning; ?></p>
+    <?php endif; ?>
+</div>
+
+<div class="form-container">
+    <form method="POST" class="form-section">
+        <h2>Set Pricing Rules</h2>
+        <div>
+            <label for="price-A">Price of A (pence): </label>
+            <input type="number" id="price-A" name="price-A" value="<?php echo isset($pricingRules['A']) ? $pricingRules['A']['price'] : '50'; ?>">
+        </div>
+        <div>
+            <label for="price-B">Price of B (pence): </label>
+            <input type="number" id="price-B" name="price-B" value="<?php echo isset($pricingRules['B']) ? $pricingRules['B']['price'] : '75'; ?>">
+        </div>
+        <div>
+            <label for="price-C">Price of C (pence): </label>
+            <input type="number" id="price-C" name="price-C" value="<?php echo isset($pricingRules['C']) ? $pricingRules['C']['price'] : '25'; ?>">
+        </div>
+        <div>
+            <label for="price-D">Price of D (pence): </label>
+            <input type="number" id="price-D" name="price-D" value="<?php echo isset($pricingRules['D']) ? $pricingRules['D']['price'] : '150'; ?>">
+        </div>
+        <div>
+            <label for="price-E">Price of E (pence): </label>
+            <input type="number" id="price-E" name="price-E" value="<?php echo isset($pricingRules['E']) ? $pricingRules['E']['price'] : '200'; ?>">
+        </div>
+        <button type="submit" name="set-pricing">Set Pricing Rules</button>
+    </form>
+
+    <form method="POST" class="form-section special-pricing">
+        <h2>Special Pricing</h2>
+        <div>
+            <label for="multipriced-item">Multipriced Item: </label>
+            <select id="multipriced-item" name="multipriced-item">
+                <option value="">Select Item</option>
+                <?php foreach ($validItems as $item) : ?>
+                    <option value="<?php echo $item; ?>" <?php echo $item === $multipricedItem ? 'selected' : ''; ?>><?php echo $item; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <label for="multipriced-quantity">Quantity: </label>
+            <input type="number" id="multipriced-quantity" name="multipriced-quantity" value="<?php echo $multipricedQuantity; ?>">
+            <label for="multipriced-price">Price (pence): </label>
+            <input type="number" id="multipriced-price" name="multipriced-price" value="<?php echo $multipricedPrice; ?>">
+        </div>
+        <div>
+            <label for="buy_n_get_1_free-item">Buy N Get 1 Free Item: </label>
+            <select id="buy_n_get_1_free-item" name="buy_n_get_1_free-item">
+                <option value="">Select Item</option>
+                <?php foreach ($validItems as $item) : ?>
+                    <option value="<?php echo $item; ?>" <?php echo $item === $buyNGet1FreeItem ? 'selected' : ''; ?>><?php echo $item; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <label for="buy_n_get_1_free-quantity">Quantity: </label>
+            <input type="number" id="buy_n_get_1_free-quantity" name="buy_n_get_1_free-quantity" value="<?php echo $buyNGet1FreeQuantity; ?>">
+        </div>
+        <div>
+            <label for="meal_deal-item1">Meal Deal Item 1: </label>
+            <select id="meal_deal-item1" name="meal_deal-item1">
+                <option value="">Select Item</option>
+                <?php foreach ($validItems as $item) : ?>
+                    <option value="<?php echo $item; ?>" <?php echo $item === $mealDealItem1 ? 'selected' : ''; ?>><?php echo $item; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <label for="meal_deal-item2">Meal Deal Item 2: </label>
+            <select id="meal_deal-item2" name="meal_deal-item2">
+                <option value="">Select Item</option>
+                <?php foreach ($validItems as $item) : ?>
+                    <option value="<?php echo $item; ?>" <?php echo $item === $mealDealItem2 ? 'selected' : ''; ?>><?php echo $item; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <label for="meal_deal-price">Price (pence): </label>
+            <input type="number" id="meal_deal-price" name="meal_deal-price" value="<?php echo $mealDealPrice; ?>">
+        </div>
+        <button type="submit" name="set-special-pricing">Set Special Pricing</button>
+    </form>
+</div>
+
+<div class="form-container">
+    <form method="POST" class="form-section scan-items">
+        <h2>Scan Items</h2>
+        <div>
+            <label for="item">Item (A, B, C, D, E): </label>
+            <input type="text" id="item" name="item">
+        </div>
+        <button type="submit" name="scan-item">Scan Item</button>
+        <button type="submit" name="clear-session" class="clear-session">Clear Session</button>
+    </form>
+</div>
+
+<div class="total-price">
+    <h2>Total Price: <span><?php echo $totalPrice; ?></span></h2>
+</div>
+
+<div class="scanned-items">
+    <h2>Scanned Items:</h2>
+    <ul>
+        <?php foreach ($scannedItems as $item => $count) : ?>
+            <li><?php echo "$item: $count"; ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
